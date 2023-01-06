@@ -4,9 +4,8 @@ import com.devskiller.dao.ItemRepository;
 import com.devskiller.model.Item;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemService {
@@ -19,8 +18,9 @@ public class ItemService {
 
     public List<String> getTitlesWithAverageRatingLowerThan(Double rating) {
 
-
-        return null;
+        return itemRepository.findItemsWithAverageRatingLowerThan(rating)
+                .stream()
+                .map(Item::getTitle).collect(Collectors.toUnmodifiableList());
     }
 
 }
